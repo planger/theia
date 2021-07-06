@@ -46,8 +46,10 @@ jobs:
         shell: bash
         run: |
           yarn --skip-integrity-check --network-timeout 100000
+          yarn lint
           npx electron-replace-ffmpeg
           npx electron-codecs-test
+          yarn build:examples
           ./scripts/check_git_status.sh
         env:
           NODE_OPTIONS: --max_old_space_size=4096
@@ -100,6 +102,7 @@ jobs:
       - name: Pre-Publish
         run: |
           yarn --skip-integrity-check --network-timeout 100000
+          yarn build:ts
           yarn docs
         env:
           NODE_OPTIONS: --max_old_space_size=4096
