@@ -28,20 +28,42 @@ export const DEFAULT_MODULES = [
     'drivelist',
 ];
 
+export interface RebuildOptions {
+    /**
+     * What modules to rebuild.
+     */
+    modules?: string[]
+    /**
+     * Folder where the module cache will be created/read from.
+     */
+    cacheRoot?: string
+}
+
 /**
- * @param target what to rebuild for
- * @param modules what to rebuild
- * @param cache root directory where to store the cache
+ * @param target What to rebuild for.
+ * @param modules What to rebuild.
  */
+export function rebuild(target: RebuildTarget, modules?: string[]): void;
+/**
+ * @param target What to rebuild for.
+ * @param options
+ */
+export function rebuild(target: RebuildTarget, options?: RebuildOptions): void;
 export function rebuild(
     target: RebuildTarget,
-    modules = DEFAULT_MODULES,
-    cacheRoot = process.cwd(),
+    modulesOrOptions: string[] | RebuildOptions = {},
 ): void {
+    const {
+        modules = DEFAULT_MODULES,
+        cacheRoot = process.cwd(),
+    } = Array.isArray(modulesOrOptions)
+            ? { modules: modulesOrOptions }
+            : modulesOrOptions;
     const cache = path.resolve(cacheRoot, '.browser_modules');
-    if (target === 'electron' && !folderExists(cache)) {
+    const cacheExists = folderExists(cache);
+    if (target === 'electron' && !cacheExists) {
         rebuildElectronModules(cache, modules);
-    } else if (target === 'browser' && folderExists(cache)) {
+    } else if (target === 'browser' && cacheExists) {
         revertBrowserModules(cache, modules);
     } else {
         console.log(`native node modules are already rebuilt for ${target}`);

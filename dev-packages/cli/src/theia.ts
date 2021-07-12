@@ -55,7 +55,7 @@ function rebuildCommand(command: string, target: ApplicationProps.Target): yargs
         },
         handler: args => {
             try {
-                rebuild(target, args.modules, args.cacheRoot);
+                rebuild(target, args);
             } catch (err) {
                 console.error(err);
                 process.exit(1);
