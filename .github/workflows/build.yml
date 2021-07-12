@@ -65,13 +65,13 @@ jobs:
         if: matrix.tests != 'skip' && runner.os == 'Linux'
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: yarn test:browser
+          run: yarn browser test
 
       - name: Test (electron)
         if: matrix.tests != 'skip' && runner.os == 'Linux'
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: yarn test:electron
+          run: yarn electron test
 
   publish:
     needs: build

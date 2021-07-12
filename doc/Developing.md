@@ -166,7 +166,6 @@ installing
 You can download dependencies and build TypeScript packages using:
 
 ```sh
-cd $THEIA
 yarn
 ```
 
@@ -175,7 +174,6 @@ This command downloads dev dependencies, links and builds all TypeScript package
 To build the example applications:
 
 ```sh
-cd $THEIA
 yarn browser build
 yarn electron build
 
@@ -188,38 +186,50 @@ To learn more and understand precisely what's going on, please look at scripts i
 ## Build Everything
 
 ```sh
-cd $THEIA
-yarn build
+yarn all
 ```
 
 This will install dependencies, link and build TypeScript packages, lint, and build the example applications.
+
+## Build TypeScript sources
+
+Dependencies must be installed before running this command.
+
+```sh
+yarn build
+```
 
 ## Linting
 
 Linting takes a lot of time, this is a limitation from ESLint. We always lint in the GitHub Workflows, but if you want to lint locally you have to do it manually:
 
 ```sh
-cd $THEIA
 yarn # build TypeScript
 yarn lint # lint TypeScript sources
 ```
+
+Note that `yarn all` does linting.
 
 ## Build extension packages individually
 
 From the root:
 
- `npx run build @theia/package-name`
+```sh
+npx run build @theia/package-name
+```
 
 From the package:
 
-`yarn --ignore-scripts && yarn build`
+```sh
+yarn build
+```
 
 ## Run the browser-based example application
 
 We can start the application from the [examples/browser](../examples/browser) directory with:
 
 ```sh
-yarn run start
+yarn start
 ```
 
 This command starts the backend application listening on port `3000`. The frontend application should be available on http://localhost:3000.
@@ -228,32 +238,19 @@ If you rebuild native Node.js packages for Electron then rollback these changes
 before starting the browser example by running from the root directory:
 
 ```
-yarn run rebuild:browser
+yarn browser rebuild
 ```
 
 ## Run the Electron-based example application
 
-From the root directory run:
-
 ```sh
-yarn run rebuild:electron
-```
-
-This command rebuilds native Node.js packages against the version of Node.js
-used by Electron.
-
-It can also be started from the [examples/electron](../examples/electron) directory with:
-
-```sh
-yarn run start
+yarn electron start
 ```
 
 ## Rebuilding
 
-In the root directory run:
-
 ```sh
-yarn run build
+yarn build
 ```
 
 ## Watching
