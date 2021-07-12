@@ -44,6 +44,7 @@
     "uuid": "^8.0.0"
   },
   "scripts": {
+    "all": "yarn install && yarn lint && yarn build",
     "preinstall": "node-gyp install",
     "postinstall": "node scripts/post-install.js",
     "prepare": "yarn tsreferences && lerna run prepare && yarn build:ts",
