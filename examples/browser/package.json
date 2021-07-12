@@ -57,7 +57,7 @@
   },
   "scripts": {
     "clean": "theia clean",
-    "rebuild": "theia rebuild:browser",
+    "rebuild": "theia rebuild:browser --cache ../..",
     "build": "tsc -b && theia build --mode development",
     "watch": "concurrently --kill-others -n tsc,bundle -c red,yellow \"tsc -b -w --preserveWatchOutput\" \"yarn watch:bundle\"",
     "watch:bundle": "theia build --watch --mode development",

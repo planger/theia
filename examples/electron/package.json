@@ -59,7 +59,7 @@
   "scripts": {
     "lint": "theiaext lint",
     "clean": "theia clean",
-    "rebuild": "theia rebuild:electron",
+    "rebuild": "theia rebuild:electron --cache ../..",
     "build": "tsc -b && theiaext compile && yarn bundle",
     "bundle": "theia build --mode development",
     "watch": "concurrently --kill-others -n tsc,bundle -c red,blue \"tsc -b -w --preserveWatchOutput\" \"yarn watch:bundle\"",
