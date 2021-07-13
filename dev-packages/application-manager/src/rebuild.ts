@@ -53,12 +53,13 @@ export function rebuild(
     target: RebuildTarget,
     modulesOrOptions: string[] | RebuildOptions = {},
 ): void {
+    const options = Array.isArray(modulesOrOptions)
+        ? { modules: modulesOrOptions }
+        : modulesOrOptions;
     const {
         modules = DEFAULT_MODULES,
         cacheRoot = process.cwd(),
-    } = Array.isArray(modulesOrOptions)
-            ? { modules: modulesOrOptions }
-            : modulesOrOptions;
+    } = options;
     const cache = path.resolve(cacheRoot, '.browser_modules');
     const cacheExists = folderExists(cache);
     if (target === 'electron' && !cacheExists) {
