@@ -41,21 +41,9 @@ export interface RebuildOptions {
 
 /**
  * @param target What to rebuild for.
- * @param modules What to rebuild.
- */
-export function rebuild(target: RebuildTarget, modules?: string[]): void;
-/**
- * @param target What to rebuild for.
  * @param options
  */
-export function rebuild(target: RebuildTarget, options?: RebuildOptions): void;
-export function rebuild(
-    target: RebuildTarget,
-    modulesOrOptions: string[] | RebuildOptions = {},
-): void {
-    const options = Array.isArray(modulesOrOptions)
-        ? { modules: modulesOrOptions }
-        : modulesOrOptions;
+export function rebuild(target: RebuildTarget, options: RebuildOptions = {}): void {
     const {
         modules = DEFAULT_MODULES,
         cacheRoot = process.cwd(),
